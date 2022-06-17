@@ -4,6 +4,7 @@ import yaml
 import logging
 import shutil
 from tqdm import tqdm
+import time
 
 
 
@@ -47,6 +48,18 @@ def copy_data(source_data_dir:str, local_data_dir:str) -> None:
                            dest= os.path.join(local_data_dir, file_name)
                            shutil.copy(source, dest)
     logging.info(f'all the files have been copied from {source_data_dir} to {local_data_dir} successfully...')
+
+
+def get_timestamp(name:str) -> str:
+    """This function returns the unique name with timestamp.
+    args:
+        name(str): name of the file/directory
+    returns:
+        str: unique name with timestamp
+    """
+    timestamp= time.asctime().replace(' ', '_').replace(':', '.')
+    unique_name= f'{name}_at_{timestamp}'
+    return unique_name
 
 
     
