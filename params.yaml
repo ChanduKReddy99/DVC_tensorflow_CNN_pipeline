@@ -1,0 +1,5 @@
+IMAGE_SIZE: [224,224,3]   #image size used in VGG16 model
+BATCH_SIZE: 16    #batch size used in training.(32 is the default value in Keras)
+EPOCHS: 10    #number of epochs used in training.(10 is the default value in Keras)
+LEARNING_RATE: 0.001   #learning rate used in training.(0.001 is the default value in Keras)
+AUGMENTATION: True  #whether to use data augmentation in training.(True is the default value in Keras)

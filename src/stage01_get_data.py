@@ -46,9 +46,10 @@ if __name__ == '__main__':
         logging.info("\n**************************")
         logging.info(">>>>>> Stage 01: get_data started.. <<<<<<<<")
         get_data(parsed_args.config)
+        logging.info(">>>>>> Stage 01: get_data is completed <<<<<<<<\n")
 
     except Exception as e:
         logging.error(e)
-        logging.error("\nStage 01: get_data failed")
+        logging.error("\nStage 01: get_data failed....")
 
 
