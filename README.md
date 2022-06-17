@@ -1,1 +1,1 @@
-# DVC_tensorflow_CNN
+# DVC_tensorflow_CNN_pipeline
