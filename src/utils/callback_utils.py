@@ -41,3 +41,23 @@ def create_and_save_checkpointing_callback(callbacks_dir: str, checkpoint_dir: s
 
     logging.info(f'checkpointing callbacks are saved at: {checkpoint_callback_file_path} as binary file')
     
+
+def get_callbacks(callbacks_dir_path: str) -> list:
+    """This function returns and save the callbacks from the callbacks directory.
+
+    Args:
+        callbacks_dir(str): path to the callbacks directory(callback_dir)
+    
+    Returns:
+        list: list of callbacks for training
+    """
+
+    callback_paths= [
+        os.path.join(callbacks_dir_path, pickle_file) for pickle_file in os.listdir(callbacks_dir_path) if pickle_file.endswith('.bin')
+    ]
+
+    callbacks= [joblib.load(path) for path in callback_paths]
+
+    logging.info(f'saved callbacks are loaded and ready to be used now')
+
+    return callbacks

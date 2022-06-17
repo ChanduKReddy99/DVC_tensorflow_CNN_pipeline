@@ -33,3 +33,28 @@ stages:
         outs:
             - artifacts/callbacks/checkpoint_callback.bin
             - artifacts/callbacks/tensorboard_callback.bin
+
+    train_model:
+        cmd: python src/stage04_train.py --config=configs/config.yaml --params=params.yaml
+        deps:
+            - src/stage04_train.py
+            - src/utils/common_utils.py
+            - src/utils/model.py
+            - src/utils/callback_utils.py
+            - src/utils/data_management.py
+            - artifacts/callbacks/checkpoint_callback.bin
+            - artifacts/callbacks/tensorboard_callback.bin
+            - artifacts/base_model/updated_VGG16_model.h5
+            - data/cat
+            - data/dog
+
+            - configs/config.yaml
+        params:
+            - IMAGE_SIZE
+            - BATCH_SIZE
+            - EPOCHS
+            - AUGMENTATION
+        outs:
+            - artifacts/trained_model
+            - artifacts/tensorboard_log_dir
+            - artifacts/checkpoints

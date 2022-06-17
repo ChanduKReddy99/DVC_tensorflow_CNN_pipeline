@@ -1,8 +1,9 @@
 import io
+import os
 import logging
-from tensorboard import summary
+from pyexpat import model
 import tensorflow as tf
-# from src.utils.common_utils import get_timestamp
+from src.utils.common_utils import get_timestamp
 
 
 def _get_model_summary(model):
@@ -80,3 +81,20 @@ def prepare_full_model(base_model, learning_rate, CLASSES= 2,
     logging.info(f'Full model summary: \n{_get_model_summary(full_model)}')
     return full_model
 
+
+def load_full_model(untrained_full_model_path:str) -> tf.keras.models.Model:
+    model= tf.keras.models.load_model(untrained_full_model_path)
+    logging.info(f'untrained model is read from {untrained_full_model_path}')
+    logging.info(f'untrained full model summary: \n{_get_model_summary(model)}')
+    return model
+
+
+def get_unique_path_to_save_model(trained_model_dir:str, 
+              model_name:str= 'model') -> str:
+    """This function returns the unique path to save the trained model.
+    """
+    timestamp= get_timestamp(name= model_name)
+    unique_model_name = f'{timestamp}_.h5'
+    unique_model_path = os.path.join(trained_model_dir, unique_model_name)
+    return unique_model_path
+    
